@@ -1,5 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Base.Theme.Expenseable" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="android:windowBackground">@color/backgroundLight</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="Theme.Expenseable" parent="Base.Theme.Expenseable" />
