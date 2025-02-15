@@ -1,6 +1,7 @@
 package com.example.expenseable.view.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -18,6 +19,7 @@ import com.example.expenseable.R
 import com.example.expenseable.databinding.ActivityMainBinding
 import com.example.expenseable.model.entities.Transaction
 import com.example.expenseable.view.adapters.TransactionsAdapter
+import com.example.expenseable.viewmodel.AuthViewModel
 import com.example.expenseable.viewmodel.TransactionViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var adapter: TransactionsAdapter
     private lateinit var databaseReference: DatabaseReference
+    private lateinit var authViewModel: AuthViewModel
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +48,15 @@ class MainActivity : AppCompatActivity() {
         }
         firebaseAuth = FirebaseAuth.getInstance()
         viewModel = TransactionViewModel(this)
+        authViewModel = AuthViewModel(this)
+
+        authViewModel.signOut.observe(this) {
+            if (it) {
+                val intent = Intent(this, SignInActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
 
         databaseReference = FirebaseDatabase.getInstance().getReference("users")
         databaseReference.child(firebaseAuth.currentUser?.uid.toString()).child("name").get()
@@ -52,6 +64,10 @@ class MainActivity : AppCompatActivity() {
                 binding.tvUserName.text = "Hello ${it.value.toString()}"
             }
 
+
+        binding.btnSignOut.setOnClickListener {
+            authViewModel.signOut()
+        }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = TransactionsAdapter()

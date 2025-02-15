@@ -12,10 +12,12 @@ class AuthRepository(private val context: Context) {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val firebaseReference = FirebaseDatabase.getInstance().getReference("users")
     val authList: MutableLiveData<FirebaseUser> = MutableLiveData<FirebaseUser>()
+    val signOut: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
     init {
         if (firebaseAuth.currentUser != null) {
             authList.postValue(firebaseAuth.currentUser)
+            signOut.postValue(false)
         }
     }
 
@@ -74,5 +76,10 @@ class AuthRepository(private val context: Context) {
                     ).show()
                 }
             }
+    }
+
+    fun signOut(){
+        firebaseAuth.signOut()
+        signOut.postValue(true)
     }
 }
