@@ -11,7 +11,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.expenseable.R
 import com.example.expenseable.databinding.ActivityMainBinding
 import com.example.expenseable.model.entities.Transaction
@@ -72,6 +74,22 @@ class MainActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener {
             openDialog()
         }
+
+        ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val id = adapter.transactionList[viewHolder.adapterPosition].id
+                viewModel.deleteTransaction(id)
+            }
+
+        }).attachToRecyclerView(binding.recyclerView)
     }
 
     @SuppressLint("SimpleDateFormat")

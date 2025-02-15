@@ -13,4 +13,8 @@ class TransactionViewModel(context: Context): ViewModel() {
     fun addTransaction(expense: Transaction) {
         transactionRepository.addTransaction(expense)
     }
+
+    fun deleteTransaction(id: String) {
+        transactionRepository.deleteTransaction(id)
+    }
 }

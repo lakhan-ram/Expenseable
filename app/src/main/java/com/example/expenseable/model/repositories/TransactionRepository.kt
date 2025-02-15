@@ -53,4 +53,8 @@ class TransactionRepository(private val context: Context) {
         })
         return transactionList
     }
+
+    fun deleteTransaction(id: String) {
+        firebaseReference.child(id).removeValue()
+    }
 }

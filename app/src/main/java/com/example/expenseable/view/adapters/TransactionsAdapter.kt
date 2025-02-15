@@ -11,7 +11,7 @@ import com.example.expenseable.model.entities.Transaction
 
 class TransactionsAdapter: RecyclerView.Adapter<TransactionsAdapter.TransactionViewHolder>() {
 
-    private var transactionList: List<Transaction> = listOf()
+    var transactionList: List<Transaction> = listOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_each_transaction, parent, false)
         return TransactionViewHolder(view)
