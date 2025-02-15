@@ -16,4 +16,12 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="reset_password">Reset password</string>
     <string name="send">Send</string>
+    <string name="total_balance">Total Balance</string>
+    <string name="income">Income</string>
+    <string name="expenses">Expenses</string>
+    <string name="transactions">Transactions</string>
+    <string name="add_icon">Add icon</string>
+    <string name="no_transactions">No Transactions</string>
+    <string name="sign_out_icon">Sign out icon</string>
+    <string name="_0">$ 0</string>
 </resources>
