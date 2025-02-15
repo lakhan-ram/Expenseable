@@ -1,4 +1,4 @@
-package com.example.expenseable.view.repositories
+package com.example.expenseable.view.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent

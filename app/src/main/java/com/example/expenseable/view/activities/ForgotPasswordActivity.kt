@@ -1,4 +1,4 @@
-package com.example.expenseable.view.repositories
+package com.example.expenseable.view.activities
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
