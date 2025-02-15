@@ -80,6 +80,9 @@ class MainActivity : AppCompatActivity() {
                 if (list.isEmpty()) {
                     binding.tvNoTransactions.visibility = View.VISIBLE
                     binding.progressBarMain.visibility = View.GONE
+                    binding.tvTotalBalance.text = "$ 0"
+                    binding.tvIncome.text = "$ 0"
+                    binding.tvExpense.text = "$ 0"
                 } else {
                     binding.tvNoTransactions.visibility = View.GONE
                     binding.tvIncome.text = "$ ${list.filter { it.type == "Income" }.sumOf { it.amount.toDouble() }}"
