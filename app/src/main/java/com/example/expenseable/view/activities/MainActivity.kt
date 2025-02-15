@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -75,15 +76,17 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.transactionList.observe(this) { list ->
             if (list != null) {
-                binding.tvNoTransactions.visibility = View.GONE
                 binding.progressBarMain.visibility = View.GONE
-                binding.tvIncome.text = "${list.filter { it.type == "Income" }.sumOf { it.amount.toDouble() }}"
-                binding.tvExpense.text = "${list.filter { it.type == "Expense" }.sumOf { it.amount.toDouble() }}"
-                binding.tvTotalBalance.text = "${list.filter { it.type == "Income" }.sumOf { it.amount.toDouble() } - list.filter { it.type == "Expense" }.sumOf { it.amount.toDouble() }}"
-                adapter.updateList(list)
-            } else {
-                binding.tvNoTransactions.visibility = View.VISIBLE
-                binding.progressBarMain.visibility = View.GONE
+                if (list.isEmpty()) {
+                    binding.tvNoTransactions.visibility = View.VISIBLE
+                    binding.progressBarMain.visibility = View.GONE
+                } else {
+                    binding.tvNoTransactions.visibility = View.GONE
+                    binding.tvIncome.text = "$ ${list.filter { it.type == "Income" }.sumOf { it.amount.toDouble() }}"
+                    binding.tvExpense.text = "$ ${list.filter { it.type == "Expense" }.sumOf { it.amount.toDouble() }}"
+                    binding.tvTotalBalance.text = "$ ${list.filter { it.type == "Income" }.sumOf { it.amount.toDouble() } - list.filter { it.type == "Expense" }.sumOf { it.amount.toDouble() }}"
+                    adapter.updateList(list)
+                }
             }
         }
 
