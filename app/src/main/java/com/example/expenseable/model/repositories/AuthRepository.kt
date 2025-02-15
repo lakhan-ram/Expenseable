@@ -56,4 +56,17 @@ class AuthRepository(private val context: Context) {
                 }
             }
     }
+
+    fun resetPassword(email:String){
+        firebaseAuth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { taskReset ->
+                if (taskReset.isSuccessful) {
+                    Toast.makeText(
+                        context,
+                        "Email sent",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
 }

@@ -14,4 +14,6 @@
     <string name="enter_your_name">Enter your name</string>
     <string name="confirm_your_password">Confirm your password</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="reset_password">Reset password</string>
+    <string name="send">Send</string>
 </resources>

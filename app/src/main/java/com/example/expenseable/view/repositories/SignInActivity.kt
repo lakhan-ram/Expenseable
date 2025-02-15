@@ -38,6 +38,11 @@ class SignInActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.tvForgotPassword.setOnClickListener {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btnSignInSignIn.setOnClickListener {
             val email = binding.etTextEmailSignIn.text.toString()
             val password = binding.etTextPasswordSignIn.text.toString()
