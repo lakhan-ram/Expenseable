@@ -13,6 +13,12 @@ class AuthRepository(private val context: Context) {
     private val firebaseReference = FirebaseDatabase.getInstance().getReference("users")
     val authList: MutableLiveData<FirebaseUser> = MutableLiveData<FirebaseUser>()
 
+    init {
+        if (firebaseAuth.currentUser != null) {
+            authList.postValue(firebaseAuth.currentUser)
+        }
+    }
+
     fun signUp(name: String, email: String, password: String) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { taskSignUp ->
